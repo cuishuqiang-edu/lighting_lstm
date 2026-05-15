@@ -19,6 +19,9 @@ patience: 10
 lr_scheduler: cosine
 log_interval: 10
 
+# Metrics
+threshold: 0.1
+
 # Loss
 pos_weight: 10.0
 focal_gamma: 2.0

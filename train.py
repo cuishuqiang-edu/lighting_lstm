@@ -70,6 +70,8 @@ def parse_args():
     p.add_argument('--log_interval', type=int, default=50)
     p.add_argument('--focal_gamma', type=float, default=2.0,
                    help='Focal Loss gamma: higher = more focus on hard examples')
+    p.add_argument('--threshold', type=float, default=0.1,
+                   help='Decision threshold for CSI/POD/FAR metrics')
 
     # Misc
     p.add_argument('--save_dir', default='checkpoints/run')
@@ -170,7 +172,7 @@ def main():
                 'save_dir', 'resume', 'test_only', 'force_cpu', 'seed', 'list_models',
                 'max_train_samples', 'max_val_samples', 'max_test_samples', 'num_workers',
                 'batch_size', 'epochs', 'log_interval', 'oversample_pos', 'spatial_patch_size',
-                'grid_mode', 'grid_dataset_dir', 'crop_size'}
+                'grid_mode', 'grid_dataset_dir', 'crop_size', 'threshold'}
     model_kwargs = {k: v for k, v in cfg.items() if k not in _exclude}
     model = create_model(model_name, n_features=n_features, L=L, H=H, **model_kwargs)
     print(f'         {model.describe()}')

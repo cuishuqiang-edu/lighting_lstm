@@ -96,6 +96,7 @@ class Trainer:
 
         self.clip_grad = config.get('clip_grad', 1.0)
         self.log_interval = config.get('log_interval', 50)
+        self.threshold = float(config.get('threshold', 0.1))
 
         # Checkpoint dir
         save_dir = config.get('save_dir', 'checkpoints/run')
@@ -208,8 +209,17 @@ class Trainer:
 
         y_pred = torch.cat(preds)
         y_true = torch.cat(targets)
-        metrics = lightning_metrics(y_pred, y_true)
+        metrics = lightning_metrics(y_pred, y_true, threshold=self.threshold)
         metrics['loss'] = total_loss / len(loader)
+
+        # Diagnostic: prediction statistics
+        prob_mean = y_pred.mean().item()
+        prob_max = y_pred.max().item()
+        pct_positive = (y_pred > self.threshold).float().mean().item() * 100
+        metrics['pred_mean'] = prob_mean
+        metrics['pred_max'] = prob_max
+        metrics['pred_pct'] = pct_positive
+
         return metrics
 
     # ===== Public API =====
@@ -234,6 +244,7 @@ class Trainer:
                 f'val_loss={val_m["loss"]:.6f} | '
                 f'CSI={val_m["csi"]:.4f} POD={val_m["pod"]:.3f} '
                 f'FAR={val_m["far"]:.3f} HSS={val_m["hss"]:.3f} | '
+                f'pred⇧{val_m["pred_pct"]:.1f}% (max={val_m["pred_max"]:.3f} th={self.threshold}) | '
                 f'{train_m["time"]:.0f}s'
             )
 
@@ -278,7 +289,8 @@ class Trainer:
             f'[Test] loss={metrics["loss"]:.6f} '
             f'MSE={metrics["mse"]:.4f} MAE={metrics["mae"]:.4f} '
             f'CSI={metrics["csi"]:.4f} POD={metrics["pod"]:.3f} '
-            f'FAR={metrics["far"]:.3f} HSS={metrics["hss"]:.3f}'
+            f'FAR={metrics["far"]:.3f} HSS={metrics["hss"]:.3f} '
+            f'th={self.threshold}'
         )
 
         results = {
