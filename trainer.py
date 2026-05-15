@@ -75,8 +75,8 @@ class Trainer:
         # Optimizer
         self.optimizer = AdamW(
             model.parameters(),
-            lr=config.get('lr', 1e-3),
-            weight_decay=config.get('weight_decay', 1e-4),
+            lr=float(config.get('lr', 1e-3)),
+            weight_decay=float(config.get('weight_decay', 1e-4)),
         )
 
         # LR Scheduler
