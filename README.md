@@ -65,7 +65,7 @@ cd /home/xingtao/cui_model/cc_try
 python train.py --config configs/unet.yaml
 # 等价于:
 python train.py --grid_mode --model unet --epochs 50 --batch_size 8 --lr 1e-3 \
-  --grid_dataset_dir /mnt/sda/data/cuisq/CMA-2025/Data/processed/grid_dataset
+  --grid_dataset_dir /mnt/sda/data/cuisq/CMA-2025/Data/processed/grid_dataset/grid_dataset
 ```
 
 ## 服务器部署
@@ -74,7 +74,7 @@ python train.py --grid_mode --model unet --epochs 50 --batch_size 8 --lr 1e-3 \
 
 | 目录 | 位置 | 大小 |
 |------|------|------|
-| 网格数据集 | `/mnt/sda/data/cuisq/CMA-2025/Data/processed/grid_dataset/` | ~27 GB (1240 NPZ) |
+| 网格数据集 | `/mnt/sda/data/cuisq/CMA-2025/Data/processed/grid_dataset/grid_dataset/` | ~27 GB (1240 NPZ) |
 
 ### 代码
 
@@ -88,7 +88,7 @@ git pull origin master
 ### 路径映射
 
 - 代码: `/home/xingtao/cui_model/cc_try/`
-- 数据: `/mnt/sda/data/cuisq/CMA-2025/Data/processed/grid_dataset/`
+- 数据: `/mnt/sda/data/cuisq/CMA-2025/Data/processed/grid_dataset/grid_dataset/`
 - Python: `cui_torch` (conda)
 
 ## 评估指标

@@ -1,7 +1,7 @@
 # U-Net 全网格闪电预测
 model: unet
 grid_mode: true
-grid_dataset_dir: /mnt/sda/data/cuisq/CMA-2025/Data/processed/grid_dataset
+grid_dataset_dir: /mnt/sda/data/cuisq/CMA-2025/Data/processed/grid_dataset/grid_dataset
 crop_size: 128
 
 n_features: 149
