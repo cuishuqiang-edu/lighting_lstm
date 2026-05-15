@@ -1,0 +1,29 @@
+# U-Net 全网格闪电预测
+model: unet
+grid_mode: true
+grid_dataset_dir: Data/processed/grid_dataset
+crop_size: 128
+
+n_features: 149
+L: 13
+H: 12
+
+# Training
+epochs: 50
+batch_size: 8
+lr: 1e-3
+lr_min: 1e-6
+weight_decay: 1e-4
+clip_grad: 1.0
+patience: 10
+lr_scheduler: cosine
+log_interval: 10
+
+# Loss
+pos_weight: 10.0
+focal_gamma: 2.0
+
+# Misc
+save_dir: checkpoints/unet
+seed: 42
+num_workers: 0

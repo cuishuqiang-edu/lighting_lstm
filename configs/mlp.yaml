@@ -1,0 +1,23 @@
+model: mlp
+d_model: 512
+n_layers: 3
+dropout: 0.2
+
+lr: 0.001
+pos_weight: 50.0
+weight_decay: 0.0001
+batch_size: 256
+epochs: 50
+patience: 10
+lr_scheduler: cosine
+clip_grad: 1.0
+
+L: 13
+H: 12
+max_train_samples: 200000
+max_val_samples: 40000
+max_test_samples: 40000
+
+save_dir: checkpoints/mlp
+cell_index: Data/processed/dataset/cell_index.csv
+dataset_dir: Data/processed/dataset

@@ -1,0 +1,27 @@
+model: patchtst
+d_model: 256
+nhead: 8
+n_layers: 3
+dropout: 0.2
+d_ff: 512
+patch_len: 4
+stride: 2
+
+lr: 0.0001
+pos_weight: 50.0
+weight_decay: 0.00001
+batch_size: 128
+epochs: 50
+patience: 10
+lr_scheduler: cosine
+clip_grad: 1.0
+
+L: 13
+H: 12
+max_train_samples: 200000
+max_val_samples: 40000
+max_test_samples: 40000
+
+save_dir: checkpoints/patchtst
+cell_index: Data/processed/dataset/cell_index.csv
+dataset_dir: Data/processed/dataset
